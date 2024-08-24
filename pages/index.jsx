@@ -652,8 +652,6 @@ export default function Home() {
         <>
         <h1>Homepage</h1>
         <Skills />
-        <CandlestickChart data={data} />
-        <Skills />
         </>
         
     );
