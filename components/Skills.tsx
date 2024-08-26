@@ -14,15 +14,15 @@ const Skills: React.FC = () => {
     useEffect(() => {
     // Initial data
         const initialNodes: Node[] = [
-        {"id": "Frontend", "group": 25},
-        {"id": "HTML", "group": 20},
-        {"id": "CSS", "group": 20},
-        {"id": "HTML5", "group": 15},
-        {"id": "CSS3", "group": 15},
-        {"id": "Bootstrap", "group": 10},
-        {"id": "Tailwind", "group": 10},
-        {"id": "PHP", "group": 5},
-        {"id": "JS", "group": 5},
+        {"id": "Frontend", "group": 25, "isMain": true},
+        {"id": "HTML", "group": 20, "isMain": true},
+        {"id": "CSS", "group": 20, "isMain": true},
+        {"id": "HTML5", "group": 15, "isMain": true},
+        {"id": "CSS3", "group": 15, "isMain": false},
+        {"id": "Bootstrap", "group": 10, "isMain": false},
+        {"id": "Tailwind", "group": 10, "isMain": false},
+        {"id": "PHP", "group": 5, "isMain": false},
+        {"id": "JS", "group": 5, "isMain": false},
         ];
 
         const initialLinks: Link[] = [
@@ -104,7 +104,7 @@ const Skills: React.FC = () => {
         .data(data.links)
         .enter().append("line")
         .attr("stroke", "#999")
-        .attr("stroke-opacity", 0.6)
+        .attr("stroke-opacity", link => (link.source as Node).isMain && (link.target as Node).isMain ? 1 : 0.1)
         .attr("stroke-width", d => Math.sqrt(d.value));
 
         const nodeGroup = svg.append("g")
@@ -117,6 +117,7 @@ const Skills: React.FC = () => {
         var nodeEnter = nodeGroup
             .enter()
             .append("g")
+            .style("opacity", (d) => d.isMain ? 1 : 0.1) 
             .call(circleDrag
                 .on("start", dragstarted)
                 .on("drag", dragged)
@@ -126,6 +127,7 @@ const Skills: React.FC = () => {
         let circleNode = nodeEnter.append("circle")
             .attr("r", d => 10 + d.group)
             .attr("fill", d => d3.schemeCategory10[d.group % 10])
+            
 
         
 
@@ -134,7 +136,7 @@ const Skills: React.FC = () => {
             .attr("text-anchor", "middle")
             .text(d => d.id)
             .style("font-size", "10px")
-            .style("fill", "black");
+            .style("fill", "black")
 
         simulation.on("tick", () => {
         link
@@ -149,22 +151,19 @@ const Skills: React.FC = () => {
 
         nodeEnter
             .on('mouseover', event => {
+                
                 //console.log(d3.select(event.target).datum().id)
                 const target = event.target
                 // @ts-ignore
                 var name = d3.select(target).datum().id
-                nodeEnter.style("opacity", function(node) {
-                    return isAdjacent(name, node.id) ? 1 : 0.1;
-                });
+                d3.select(target).style("opacity", 1);
+                nodeEnter.style("opacity", node => isAdjacent(name, node.id) ? 1 : 0.1);
                 
-                link.style("opacity", function(node) {
-                    // @ts-ignore
-                    return node.source.id == name || node.target.id == name ? 1 : 0.1;
-                });
+                link.attr("stroke-opacity", node => (node.source as Node).id == name || (node.target as Node).id == name ? 1 : 0.1);
             })
-            .on('mouseout', function() {
-                nodeEnter.style("opacity", 1);
-                link.style("opacity", 1);
+            .on('mouseout', event => {
+                nodeEnter.style("opacity", (d) => d.isMain ? 1 : 0.1) ;
+                link.attr("stroke-opacity", link => (link.source as Node).isMain && (link.target as Node).isMain ? 1 : 0.1)
             })
 
     }, [data]);
