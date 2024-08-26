@@ -7,8 +7,9 @@ import { ArrayLike, select, Selection } from "d3-selection";
 import { Node, Link, GraphData } from '../utils/types';
 
 const Skills: React.FC = () => {
-    const svgRef = useRef<SVGSVGElement | null>(null);
-    const [data, setData] = useState<GraphData>({ nodes: [], links: [] });
+    const svgRef = useRef<SVGSVGElement | null>(null)
+    const [data, setData] = useState<GraphData>({ nodes: [], links: [] })
+    const [adjacentNodes, setAdjacentNodes] = useState<string[]>()
 
     useEffect(() => {
     // Initial data
@@ -33,45 +34,70 @@ const Skills: React.FC = () => {
         {"source": "CSS", "target": "Bootstrap", "value": 1},
         {"source": "CSS", "target": "Tailwind", "value": 1},
         {"source": "HTML", "target": "HTML5", "value": 1},
+        {"source": "HTML", "target": "JS", "value": 1},
+        {"source": "HTML", "target": "CSS", "value": 1},
         ];
 
+        let adjlist:string[] = []
+   
+        initialLinks.forEach(function(d) {
+            console.log(d)
+            adjlist.push(`${d.source}-${d.target}`)
+            adjlist.push(`${d.target}-${d.source}`)
+        });
+
         setData({ nodes: initialNodes, links: initialLinks });
+        setAdjacentNodes(adjlist)
     }, []);
 
+    const svg = d3.select(svgRef.current);
+        const width = 800;
+        const height = 600;
+    const getNodeRadius = (d: Node) => 10 + d.group;
     let circleDrag = d3Drag.drag<SVGGElement, Node>();
+    let simulation = d3.forceSimulation(data.nodes)
+        .force("link", d3.forceLink<Node, Link>(data.links).id(d => d.id)
+        .distance(d => getNodeRadius(d.source as Node) + getNodeRadius(d.target as Node) + 30))
+        .force("charge", d3.forceManyBody().strength(-30).distanceMax(100))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .alphaTarget(1);
 
     function dragstarted(this: SVGGElement, event: any, d: Node) {
         // cast d3 event to drag event. Otherwise, d3 event is currently defined as type 'any'
         const e = event as d3Drag.D3DragEvent<SVGGElement, Node, Node | d3Drag.SubjectPosition>;
         e.sourceEvent.stopPropagation();
+        if (!e.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
         select(this).classed("dragging", true);
     }
 
     function dragged(this: SVGGElement, event: any, d: Node) {
         // cast d3 event to drag event. Otherwise, d3 event is currently defined as type 'any'
         const e = event as d3Drag.D3DragEvent<SVGGElement, Node, Node | d3Drag.SubjectPosition>;
-        select(this).attr("cx", d.x = e.x).attr("cy", d.y = e.y);
+        d.fx = e.x;
+        d.fy = e.y;
     }
 
     function dragended(this: SVGGElement, event: any, d: Node) {
         select(this).classed("dragging", false);
+        const e = event as d3Drag.D3DragEvent<SVGGElement, Node, Node | d3Drag.SubjectPosition>;
+        if (!e.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+    }
+
+    function isAdjacent(a: string, b: string): boolean {
+        return a == b || adjacentNodes!.includes(`${a}-${b}`) || adjacentNodes!.includes(`${b}-${a}`);
     }
 
 
     useEffect(() => {
         if (!svgRef.current || data.nodes.length === 0) return;
-
-        const svg = d3.select(svgRef.current);
-        const width = +svg.attr('width');
-        const height = +svg.attr('height');
-
         // Clear svg content
         svg.selectAll("*").remove();
 
-        const simulation = d3.forceSimulation(data.nodes)
-        .force("link", d3.forceLink<Node, Link>(data.links).id(d => d.id).distance(200))
-        .force("charge", d3.forceManyBody().strength(-20).distanceMax(100))
-        .force("center", d3.forceCenter(width / 2, height / 2));
+        
 
         const link = svg.append("g")
         .selectAll("line")
@@ -97,9 +123,11 @@ const Skills: React.FC = () => {
                 .on("end", dragended));
 
 
-        nodeEnter.append("circle")
+        let circleNode = nodeEnter.append("circle")
             .attr("r", d => 10 + d.group)
             .attr("fill", d => d3.schemeCategory10[d.group % 10])
+
+        
 
         nodeEnter.append("text")
             .attr("dy", ".35em")
@@ -118,6 +146,26 @@ const Skills: React.FC = () => {
         nodeEnter
         .attr("transform", (d:any) => `translate(${d.x},${d.y})`);
         });
+
+        nodeEnter
+            .on('mouseover', event => {
+                //console.log(d3.select(event.target).datum().id)
+                const target = event.target
+                // @ts-ignore
+                var name = d3.select(target).datum().id
+                nodeEnter.style("opacity", function(node) {
+                    return isAdjacent(name, node.id) ? 1 : 0.1;
+                });
+                
+                link.style("opacity", function(node) {
+                    // @ts-ignore
+                    return node.source.id == name || node.target.id == name ? 1 : 0.1;
+                });
+            })
+            .on('mouseout', function() {
+                nodeEnter.style("opacity", 1);
+                link.style("opacity", 1);
+            })
 
     }, [data]);
 

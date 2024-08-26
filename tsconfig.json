@@ -16,6 +16,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/TestSkills.jsx", "pages/index.jsx", "components/TestSkills2.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/TestSkills.jsx", "pages/index.tsx", "components/TestSkills2.jsx"],
   "exclude": ["node_modules"]
 }
