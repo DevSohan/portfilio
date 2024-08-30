@@ -7,6 +7,7 @@ import { TestSkills2 } from "@/components/TestSkills2";
 import SkillSet from "@/components/SkillSet";
 import Navbar from "@/components/Navbar";
 import MobileNavbar from "@/components/MobileNavbar";
+import HeroSection from "@/components/HeroSection";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,11 +20,11 @@ export default function Home() {
 	const closeNav = ()=> setNav(false)
 return (
 	<>
-		{/* <MobileNavbar nav={nav} closeNav={closeNav} /> */}
+		<MobileNavbar nav={nav} closeNav={closeNav} />
 		<Navbar openNav={openNav} />
-		<h1>Homepage</h1>
-		<Skills />
-		<SkillSet />
+		<HeroSection />
+		{/* <Skills />
+		<SkillSet /> */}
 	</>
 
 );

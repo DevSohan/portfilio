@@ -2,12 +2,12 @@ import { Bars3Icon } from '@heroicons/react/16/solid'
 import React from 'react'
 
 interface Props{
-    
+    openNav: ()=> void
 }
 
-function Navbar() {
+function Navbar({openNav}:Props) {
     return (
-        <div className='w-full top-0 h-[12vh] bg-[#141c27] shadow-md'>
+        <div className='w-full sticky z-[10000] top-0 h-[12vh] bg-[#141c27] shadow-md'>
             <div className='flex items-center justify-between w-4/5 mx-auto h-full'>
                 <h1 className='flex-[0.6] cursor-pointer text-2xl text-white font-bold'>
                     MS
@@ -19,7 +19,7 @@ function Navbar() {
                 <div className='nav-link'>Education</div>
                 <div className='nav-link'>Blog</div>
                 <div className='nav-link'>Contact</div>
-                <div>
+                <div onClick={openNav}>
                     <Bars3Icon className='w-6 md:hidden h-6 cursor-pointer text-yellow-400' />
                 </div>
             </div>
