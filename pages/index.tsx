@@ -23,8 +23,8 @@ return (
 		<MobileNavbar nav={nav} closeNav={closeNav} />
 		<Navbar openNav={openNav} />
 		<HeroSection />
-		{/* <Skills />
-		<SkillSet /> */}
+		<Skills />
+		<SkillSet />
 	</>
 
 );
