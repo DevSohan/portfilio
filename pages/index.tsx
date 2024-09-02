@@ -8,6 +8,8 @@ import SkillSet from "@/components/SkillSet";
 import Navbar from "@/components/Navbar";
 import MobileNavbar from "@/components/MobileNavbar";
 import HeroSection from "@/components/HeroSection";
+import AboutMe from "@/components/AboutMe";
+import Timeline from "@/components/Timeline";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,6 +25,10 @@ return (
 		<MobileNavbar nav={nav} closeNav={closeNav} />
 		<Navbar openNav={openNav} />
 		<HeroSection />
+		<div className="relative z-30">
+			<AboutMe />
+			<Timeline />
+		</div>
 		<Skills />
 		<SkillSet />
 	</>
