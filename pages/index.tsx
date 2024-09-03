@@ -10,6 +10,9 @@ import MobileNavbar from "@/components/MobileNavbar";
 import HeroSection from "@/components/HeroSection";
 import AboutMe from "@/components/AboutMe";
 import Timeline from "@/components/Timeline";
+import SkillsGeo from "@/components/SkillsGeo";
+import Experience from "@/components/Experience";
+import ContactMe from "@/components/ContactMe";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,9 +31,12 @@ return (
 		<div className="relative z-30">
 			<AboutMe />
 			<Timeline />
+			<SkillsGeo />
+			<Experience />
+			<ContactMe />
 		</div>
-		<Skills />
-		<SkillSet />
+		{/* <Skills />
+		<SkillSet /> */}
 	</>
 
 );

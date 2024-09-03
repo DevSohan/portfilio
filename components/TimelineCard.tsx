@@ -1,22 +1,55 @@
 import { AcademicCapIcon } from '@heroicons/react/16/solid'
 import React from 'react'
 
-function TimelineCard() {
-  return (
-    <div className='flex flex-col justify-center items-center py-3'>
-        <div className='w-12 rounded-full bg-yellow-400 p-2 ring-4 ring-black'>
-            <AcademicCapIcon />
+interface Degree {
+    degree: string;
+    varsity: string;
+    city: string;
+    country: string;
+    startDate: string;
+    endDate: string;
+    skills: string[];
+    position: string;
+}
+
+interface Props{
+    align: string
+    info: Degree
+}
+
+function TimelineCard({align, info}: Props) {
+    const alignClass = info.position == "left" ? "md:self-start" : "md:self-end"
+    const iconPositionClass = info.position == "right" ? "md:flex-row" : "md:flex-row-reverse"
+    const hoverborderClass = info.position == "right" ? "before:md:border-r-8 before:md:border-r-black before:md:-left-4" : "before:md:border-l-8 before:md:border-l-black before:md:-right-4"
+    return (
+        <div className={`flex flex-col justify-center items-center py-3 w-full md:w-1/2 ${iconPositionClass} md:space-x-0 md:px-8 md:justify-between md:items-start md:gap-x-6 lg:gap-x-10 ${alignClass}`}>
+            <div className='w-12 rounded-full bg-yellow-400 p-2 ring-4 ring-black ring-inset'>
+                <AcademicCapIcon />
+            </div>
+            <div className={`bg-yellow-400 my-5 p-4 rounded-lg text-center md:text-left md:my-0 md:relative md:w-4/5 before:md:content-[""] before:md:border-8 before:md:border-solid before:md:border-transparent before:md:h-4 before:md:w-4 before:md:absolute ${hoverborderClass}`}>
+                {/**border:7px solid transparent
+                 * border-right: 7px solid #fff
+                 */}
+                <h3 className='text-lg font-bold'>{info.degree}</h3>
+                <h4 className='text-base font-semibold'>{info.varsity}</h4>
+                <h4 className='text-sm uppercase'>{`${info.city}, ${info.country}`}</h4>
+                {/* <p className='text-sm'>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab esse dolore suscipit magnam quo reiciendis eos ad facere.
+                </p> */}
+                <p className='text-sm'>{`${info.startDate} - ${info.endDate}`}</p>
+                <div className='text-sm'>
+                    <div className='flex flex-row gap-x-3'>
+                    {
+                        info.skills.map((skill, key) => {
+                            return(
+                                <span className='py-1 px-2 bg-slate-400 space-x-1' key={key}>{skill}</span>
+                            )
+                        })
+                    }
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className='bg-yellow-400 my-5 p-4 rounded-lg text-center'>
-            <h3 className='text-lg font-bold'>Masters in Geodesy and Geoinformatics</h3>
-            <h4 className='text-base font-bold'>HafenCity University Hamburg</h4>
-            <p className='text-sm'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab esse dolore suscipit magnam quo reiciendis eos ad facere.
-            </p>
-            <p className='text-base font-bold'>October, 2019 - August, 2024</p>
-            <div className='text-md font-bold'>Skills: GIS, LiDAR, Satellite Image Analysis</div>
-        </div>
-    </div>
   )
 }
 
