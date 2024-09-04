@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@heroicons/react": "^2.1.5",
     "@types/d3": "^7.4.3",
     "chroma-js": "^3.0.0",
