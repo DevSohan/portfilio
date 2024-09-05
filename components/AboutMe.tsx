@@ -4,7 +4,7 @@ import React from 'react'
 
 function AboutMe() {
     return (
-        <div className='pb-12 pt-16 md:pt-32 bg-[#121121] '>
+        <div className='pb-12 pt-16 md:pt-32 px-4 md:px-8 bg-[#121121] '>
             <div className='lg:max-w-screen-xl md:max-w-screen-lg grid grid-cols-1 md:grid-cols-2 w-full mx-auto gap-12 items-center'>
                 <div>
                     <h1 className='text-xl font-bold uppercase text-[#55e6a5] mb-4'>

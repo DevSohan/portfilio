@@ -3,7 +3,7 @@ import React from 'react'
 function Experience() {
     return (
         <div className='bg-slate-500 pb-5'>
-            <div className='text-center pt-5 md:pt-10  mx-auto lg:max-w-screen-xl md:max-w-screen-lg'>
+            <div className='text-center pt-5 md:pt-10  mx-auto px-4 md:px-8 lg:max-w-screen-xl md:max-w-screen-lg'>
                 <h1 className='text-xl font-bold uppercase text-[#55e6a5] mb-4'>
                     Experience
                 </h1>
