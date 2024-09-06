@@ -1,5 +1,6 @@
 import { AcademicCapIcon } from '@heroicons/react/16/solid'
 import React from 'react'
+
 enum Position{
     Left,
     Right
@@ -19,7 +20,7 @@ interface Props{
     info: Degree
 }
 
-function TimelineCard({info}: Props) {
+function ExperienceCard({info}: Props) {
     const alignClass = info.position == Position.Left ? "md:self-start" : "md:self-end"
     const iconPositionClass = info.position == Position.Right ? "md:flex-row" : "md:flex-row-reverse"
     const hoverborderClass = info.position == Position.Right ? "before:md:border-r-8 before:md:border-r-black before:md:-left-4" : "before:md:border-l-8 before:md:border-l-black before:md:-right-4"
@@ -55,4 +56,4 @@ function TimelineCard({info}: Props) {
   )
 }
 
-export default TimelineCard
+export default ExperienceCard

@@ -1,10 +1,10 @@
 import React from 'react'
 import TimelineCard from './TimelineCard'
-interface Education {
-    msc: Degree;
-    bsc: Degree;
-}
 
+enum Position{
+    Left,
+    Right
+}
 interface Degree {
     degree: string;
     varsity: string;
@@ -13,11 +13,11 @@ interface Degree {
     startDate: string;
     endDate: string;
     skills: string[];
-    position: string;
+    position: Position;
 }
 
-const education:Education = {
-    msc: {
+const education:Degree[] = [
+    {
         degree: "Masters in Geodesy and Geoinformatics",
         varsity: "HafenCity Universität Hamburg",
         city: "Hamburg",
@@ -25,9 +25,9 @@ const education:Education = {
         startDate: "October, 2019",
         endDate: "August, 2024",
         skills: ["GIS", "LiDAR", "Remote Sensing"],
-        position: "left"
+        position: Position.Left
     },
-    bsc: {
+    {
         degree: "Bachelor in Urban and Regional Planning",
         varsity: "Khulna University of Engineering and Technology",
         city: "Khulna",
@@ -35,9 +35,9 @@ const education:Education = {
         startDate: "April, 2014",
         endDate: "April, 2018",
         skills: ["GIS", "LiDAR", "Remote Sensing"],
-        position: "right"
+        position: Position.Right
     },
-}
+]
 
 function Timeline() {
     return (
@@ -51,8 +51,13 @@ function Timeline() {
                 </h2>
             </div>
             <div className='mx-auto lg:max-w-screen-xl md:max-w-screen-lg px-5 py-5 mb-5 md:px-0 md:py-12 md:mb-10 before:content-[""] before:w-2 before:bg-black before:h-full before:absolute before:left-1/2 before:top-0 before:-translate-x-1/2 before:z-0 relative md:flex md:flex-col lg:gap-y-6'>
-                <TimelineCard align={"right"} info={education.bsc} />
-                <TimelineCard align={"left"} info={education.msc} />
+                {
+                    education.map((education) => {
+                        return(
+                            <TimelineCard info={education} />
+                        )
+                    })
+                }
             </div>
         </div>
     )
