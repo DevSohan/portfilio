@@ -51,9 +51,9 @@ function Experience() {
             </div>
             <div className='mx-auto lg:max-w-screen-xl md:max-w-screen-lg px-5 py-5 mb-5 md:px-0 md:py-12 md:mb-10 before:content-[""] before:w-2 before:bg-black before:h-full before:absolute before:left-1/2 before:top-0 before:-translate-x-1/2 before:z-0 relative md:flex md:flex-col lg:gap-y-6'>
                 {
-                    experiences.map((experience)=>{
+                    experiences.map((experience, key)=>{
                         return(
-                            <ExperienceCard info={experience} />
+                            <ExperienceCard key={key} info={experience} />
                         )
                     })
                 }

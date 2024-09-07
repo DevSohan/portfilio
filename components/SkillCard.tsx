@@ -42,14 +42,14 @@ function SkillCard({skill}:Props) {
     }
 
     return (
-        <div className={`before:absolute before:m-0 before:w-24 before:h-40 before:rounded-xl before:inline-block before:top-0 before:bottom-0 before:left-0 before:right-0 before:rotate-[60deg] before:z-0 relative m-0 w-24 h-40 rounded-xl inline-block top-0 ${background} after:absolute after:m-0 after:w-24 after:h-40 after:rounded-xl after:inline-block after:top-0 after:bottom-0 after:left-0 after:right-0 after:-rotate-[60deg] after:z-0 group transition-[display] duration-300 ease-in-out`}>
-            <div className='relative z-10 w-full h-full flex flex-col gap-y-3 justify-center items-center'>
-                <div className='w-full h-16 relative'>
+        <div className={`before:absolute before:m-0 before:w-14 before:h-20 before:rounded-xl before:inline-block before:top-0 before:bottom-0 before:left-0 before:right-0 before:rotate-[60deg] before:z-0 relative m-0 w-14 h-20 rounded-xl inline-block top-0 ${background} after:absolute after:m-0 after:w-14 after:h-20 after:rounded-xl after:inline-block after:top-0 after:bottom-0 after:left-0 after:right-0 after:-rotate-[60deg] after:z-0 group transition-[display] duration-300 ease-in-out relative`}>
+            <div className='relative z-10 w-full h-full flex flex-col gap-y-0 justify-center items-center'>
+                <div className='w-full h-10 transition-all duration-300 ease-in-out group-hover:scale-125'>
                     <Image src={imagePath} width={100} height={100} alt=""  className='w-full h-full object-contain'/>
                 </div>
-                <div className=''>
-                    <h3 className='text-white font-bold text-xl antialiased drop-shadow-md'>{skill.title}</h3>
-                </div>
+            </div>
+            <div className='mt-2'>
+                <h3 className='text-white font-bold text-xs antialiased drop-shadow-md'>{skill.title}</h3>
             </div>
         </div>
     )

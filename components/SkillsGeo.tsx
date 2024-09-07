@@ -196,7 +196,7 @@ const newSkills:SkillSet[] = [
 
 function SkillsGeo() {
     return (
-        <div className='bg-slate-700 pb-5'>
+        <div className='bg-[#09101A] pb-5'>
             <div className='text-center pt-5 md:pt-10  mx-auto px-4 md:px-8 lg:max-w-screen-xl md:max-w-screen-lg'>
                 <h1 className='text-xl font-bold uppercase text-[#55e6a5] mb-4'>
                     Skills
@@ -211,7 +211,7 @@ function SkillsGeo() {
                         return(
                             <div key={key}>
                                 <h2 className='text-2xl font-bold antialiased text-white py-6 md:pb-10 md:pt-16'>{skillset.title}</h2>
-                                <div className='flex flex-row flex-wrap gap-x-28 gap-y-10 justify-center align-center'>
+                                <div className='flex flex-row flex-wrap gap-x-16 gap-y-10 justify-center align-center'>
                                     {
                                         skillset.skills.map((skill, key) => {
                                             return(

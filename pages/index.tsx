@@ -13,6 +13,7 @@ import Timeline from "@/components/Timeline";
 import SkillsGeo from "@/components/SkillsGeo";
 import Experience from "@/components/Experience";
 import ContactMe from "@/components/ContactMe";
+import Earth from "@/components/3DEarth/Earth";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,6 +30,7 @@ return (
 		<Navbar openNav={openNav} />
 		<HeroSection />
 		<div className="relative z-30">
+			<Earth />
 			<AboutMe />
 			<Timeline />
 			<SkillsGeo />
