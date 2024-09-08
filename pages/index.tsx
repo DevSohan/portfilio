@@ -30,7 +30,7 @@ return (
 		<Navbar openNav={openNav} />
 		<HeroSection />
 		<div className="relative z-30">
-			<Earth />
+			{/* <Earth /> */}
 			<AboutMe />
 			<Timeline />
 			<SkillsGeo />

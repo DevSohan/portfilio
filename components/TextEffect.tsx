@@ -17,7 +17,7 @@ function TextEffect() {
       ]}
       wrapper="span"
       speed={50}
-      className='text-2xl md:text-4xl text-[#55e6a5] font-bold uppercase'
+      className='text-2xl md:text-4xl text-dev-sohan-green font-bold uppercase h-10'
       repeat={Infinity}
     />
   );

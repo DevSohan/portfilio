@@ -7,7 +7,7 @@ interface Props{
 
 function Navbar({openNav}:Props) {
     return (
-        <div className='w-full fixed z-[9999] top-0 h-[12vh] bg-[#141c27] shadow-md'>
+        <div className='w-full fixed z-[9999] top-0 max-h-24 py-5 bg-dev-sohan-black-1 shadow-md'>
             <div className='flex items-center justify-between w-4/5 mx-auto h-full'>
                 <h1 className='flex-[0.6] cursor-pointer text-2xl text-white font-bold'>
                     MS
