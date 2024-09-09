@@ -14,6 +14,8 @@ import SkillsGeo from "@/components/SkillsGeo";
 import Experience from "@/components/Experience";
 import ContactMe from "@/components/ContactMe";
 import Earth from "@/components/3DEarth/Earth";
+import CertificateFilterBar from "@/components/CertificateFilterBar";
+import Certificates from "@/components/Certificates";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -35,6 +37,7 @@ return (
 			<Timeline />
 			<SkillsGeo />
 			<Experience />
+			<Certificates />
 			<ContactMe />
 		</div>
 		{/* <Skills />
