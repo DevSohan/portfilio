@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import CertificateFilterBar from './CertificateFilterBar'
+import CertificateCard from './CertificateCard'
 enum FilterBy{
     Stack = "stack",
     Language = "language"
@@ -30,6 +31,11 @@ const Certificates = () => {
                 <CertificateFilterBar filters={filters} setFilters={setFilters} stacks={stacks} languages={languages} />
 
                 <h3 className='text-white text-center'>{filters.filterBy} {filters.filterByValue}</h3>
+            </div>
+            <div className='flex gap-5 justify-center items-center flex-wrap'>
+                <CertificateCard />
+                <CertificateCard />
+                <CertificateCard />
             </div>
         </div>
     )
